@@ -2,11 +2,13 @@ const Engine = Matter.Engine;
 const World= Matter.World;
 const Bodies= Matter.Bodies;
 
-var bg
-var snow=[];
+var snowflake,snowflakeImg
+var bgImg
 
 function preload(){
   bg=loadImage("snow3.jpg");
+  snowflakeImg = loadImage("snow4.webp");
+
 }
 
 function setup() {
@@ -17,16 +19,20 @@ function setup() {
 
 function draw() {
   background(bg); 
+  drawSprites();
 
   //engine = Engine.update();
   
- if(frameCount%5===0){
-  snow.push(new Snow(random(10,1000),10, 20,20));
+  createSnowflake();
 }
 
-for(var i = 0; i < snow.length; i++){
-  snow[i].display();
- }
+function createSnowflake(){
+  if(frameCount%10===0){
+  snowflake = createSprite(random(0,800), 0, 50, 50);
+  snowflake.velocityX = -2;
+  snowflake.velocityY = 4;
+  snowflake.addImage(snowflakeImg);
+  snowflake.scale = 0.1;
+  }
 }
-  
  
